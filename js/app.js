@@ -8,11 +8,20 @@ var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
     this.y = y;
+    this.speed = Math.floor((Math.random()*200)+100);
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+
+
+Enemy.prototype.update = function tanduk(dt) {
+  if (this.x < 500) {
+    this.x += this.speed * dt
+  } else if (this.x > 500) {
+    this.speed = Math.floor((Math.random()*200)+100);
+    this.x = 0;
+  }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -83,12 +92,12 @@ Player.prototype.handleInput = function(keyCode){
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
 var player = new Player();
 var enemy1 = new Enemy(60);
 var enemy2 = new Enemy(145);
 var enemy3 = new Enemy(225);
 var allEnemies = [enemy1, enemy2, enemy3];
-
 
 
 // This listens for key presses and sends the keys to your
