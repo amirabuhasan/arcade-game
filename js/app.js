@@ -27,7 +27,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 // Enemies our player must avoid
-var Player = function(y) {
+var Player = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
@@ -41,6 +41,17 @@ var Player = function(y) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function(dt) {
+  if (this.x <= 0) {
+    this.x = 0;
+  } else if (this.x >= 400) {
+    this.x = 400;
+  }
+
+  if (this.y <= 35) {
+    this.y = 400;
+  } else if (this.y >= 400) {
+    this.y = 400;
+  }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -51,6 +62,23 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+Player.prototype.handleInput = function(keyCode){
+  if (keyCode === "up") {
+    this.y -= 85;
+  }
+  if (keyCode === "down") {
+    this.y += 85;
+  }
+  if (keyCode === "right") {
+    this.x += 100;
+  }
+  if (keyCode === "left") {
+    this.x -= 100;
+  }
+
+
+
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
