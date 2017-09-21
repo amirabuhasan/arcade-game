@@ -1,4 +1,10 @@
 // Enemies our player must avoid
+var playerXPosition;
+var playerYPosition;
+var enemyXPosition;
+var enemyYPosition;
+
+
 var Enemy = function(y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -14,18 +20,32 @@ var Enemy = function(y) {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 
-
-Enemy.prototype.update = function tanduk(dt) {
+Enemy.prototype.update = function (dt) {
   if (this.x < 500) {
     this.x += this.speed * dt
   } else if (this.x > 500) {
     this.speed = Math.floor((Math.random()*200)+100);
     this.x = 0;
   }
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+  enemyXPosition = Math.round(this.x);
+  enemyYPosition = this.y;
+  // console.log(playerXPosition)
+  // console.log("player: " + playerYPosition)
+  // console.log("enemy: " + enemyYPosition)
+
+  if (playerYPosition === enemyYPosition ){
+    if (playerXPosition === 0 && enemyXPosition > 0 && enemyXPosition < 100) {
+      console.log("Collision!")
+    } else if (playerXPosition === 100 && enemyXPosition > 100 && enemyXPosition < 200) {
+      console.log("Collision!")
+    } else if (playerXPosition === 200 && enemyXPosition > 200 && enemyXPosition < 300) {
+      console.log("Collision!")
+    } else if (playerXPosition === 300 && enemyXPosition > 300 && enemyXPosition < 400) {
+      console.log("Collision!")
+    }
+  };
 };
+
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
@@ -36,6 +56,7 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 // Enemies our player must avoid
+
 var Player = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -47,24 +68,27 @@ var Player = function() {
     this.y = 400;
 };
 
-// Update the enemy's position, required method for game
+// Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
-Player.prototype.update = function(dt) {
+
+Player.prototype.update = function() {
   if (this.x <= 0) {
     this.x = 0;
   } else if (this.x >= 400) {
     this.x = 400;
   }
-
   if (this.y <= 35) {
     this.y = 400;
   } else if (this.y >= 400) {
     this.y = 400;
   }
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+
+  playerXPosition = this.x;
+  playerYPosition = this.y;
+
+
 };
+
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
@@ -96,7 +120,7 @@ Player.prototype.handleInput = function(keyCode){
 var player = new Player();
 var enemy1 = new Enemy(60);
 var enemy2 = new Enemy(145);
-var enemy3 = new Enemy(225);
+var enemy3 = new Enemy(230);
 var allEnemies = [enemy1, enemy2, enemy3];
 
 
