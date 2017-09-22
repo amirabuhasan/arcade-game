@@ -5,6 +5,7 @@ var enemyXPosition;
 var enemyYPosition;
 
 
+
 var Enemy = function(y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
@@ -14,36 +15,19 @@ var Enemy = function(y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = 0;
     this.y = y;
-    this.speed = Math.floor((Math.random()*200)+100);
+    this.speed = Math.floor((Math.random()*300)+200);
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 
 Enemy.prototype.update = function (dt) {
-  if (this.x < 500) {
+  if (this.x <= 500) {
     this.x += this.speed * dt
   } else if (this.x > 500) {
-    this.speed = Math.floor((Math.random()*200)+100);
+    this.speed = Math.floor((Math.random()*300)+200);
     this.x = 0;
   }
-  enemyXPosition = Math.round(this.x);
-  enemyYPosition = this.y;
-  // console.log(playerXPosition)
-  // console.log("player: " + playerYPosition)
-  // console.log("enemy: " + enemyYPosition)
-
-  if (playerYPosition === enemyYPosition ){
-    if (playerXPosition === 0 && enemyXPosition > 0 && enemyXPosition < 100) {
-      console.log("Collision!")
-    } else if (playerXPosition === 100 && enemyXPosition > 100 && enemyXPosition < 200) {
-      console.log("Collision!")
-    } else if (playerXPosition === 200 && enemyXPosition > 200 && enemyXPosition < 300) {
-      console.log("Collision!")
-    } else if (playerXPosition === 300 && enemyXPosition > 300 && enemyXPosition < 400) {
-      console.log("Collision!")
-    }
-  };
 };
 
 
@@ -83,10 +67,11 @@ Player.prototype.update = function() {
     this.y = 400;
   }
 
-  playerXPosition = this.x;
-  playerYPosition = this.y;
-
-
+  if ((this.y === enemy1.y && enemy1.x - this.x > - 50 && enemy1.x - this.x < 50) ||
+  (this.y === enemy2.y && enemy2.x - this.x > - 50 && enemy2.x - this.x < 50) ||
+  (this.y === enemy3.y && enemy3.x - this.x > - 50 && enemy3.x - this.x < 50)){
+    this.y = 400;
+  };
 };
 
 
@@ -122,7 +107,6 @@ var enemy1 = new Enemy(60);
 var enemy2 = new Enemy(145);
 var enemy3 = new Enemy(230);
 var allEnemies = [enemy1, enemy2, enemy3];
-
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
