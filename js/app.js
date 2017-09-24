@@ -66,14 +66,17 @@ Player.prototype.update = function() {
   } else if (this.y >= 400) {
     this.y = 400;
   }
+  this.collisions();
+};
 
+//checks for collisions
+Player.prototype.collisions = function() {
   if ((this.y === enemy1.y && enemy1.x - this.x > - 50 && enemy1.x - this.x < 50) ||
   (this.y === enemy2.y && enemy2.x - this.x > - 50 && enemy2.x - this.x < 50) ||
   (this.y === enemy3.y && enemy3.x - this.x > - 50 && enemy3.x - this.x < 50)){
     this.y = 400;
   };
-};
-
+}
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
