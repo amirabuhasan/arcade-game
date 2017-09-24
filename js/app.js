@@ -52,6 +52,7 @@ var Player = function() {
     this.sprite = 'images/char-boy.png';
     this.x = 0;
     this.y = 400;
+    $(".high-score").append(highscore);
 };
 
 // Update the player's position, required method for game
@@ -83,17 +84,20 @@ function addScore() {
 
 
 function gameEnd() {
-  $(".popup").append("Your score was: " + score);
-  $(".modal").addClass("is-active");
   if(highscore !== null){
     if (score > highscore) {
+      $("h1").append("You set a new high score!");
       localStorage.setItem("highscore", score);
+    }
+    else{
+      $("h1").append("Unlucky mate!");
     }
   }
   else {
     localStorage.setItem("highscore", score);
   }
-  console.log(highscore);
+  $(".popup").append("Your score was: " + score);
+  $(".modal").addClass("is-active");
   restartGame();
 };
 
