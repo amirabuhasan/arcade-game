@@ -3,6 +3,8 @@ var playerXPosition;
 var playerYPosition;
 var enemyXPosition;
 var enemyYPosition;
+var score = 0;
+var highscore = localStorage.getItem("highscore");
 
 
 
@@ -62,11 +64,43 @@ Player.prototype.update = function() {
     this.x = 400;
   }
   if (this.y <= 35) {
+    addScore();
     this.y = 400;
   } else if (this.y >= 400) {
     this.y = 400;
   }
   this.collisions();
+};
+
+
+//adds score
+function addScore() {
+  score += 1;
+  $(".score").empty();
+  $(".score").append(score);
+};
+
+
+
+function gameEnd() {
+  $(".popup").append("Your score was: " + score);
+  $(".modal").addClass("is-active");
+  if(highscore !== null){
+    if (score > highscore) {
+      localStorage.setItem("highscore", score);
+    }
+  }
+  else {
+    localStorage.setItem("highscore", score);
+  }
+  console.log(highscore);
+  restartGame();
+};
+
+function restartGame() {
+  $(".js-close").on("click", function(){
+    location.reload();
+  })
 };
 
 //checks for collisions
@@ -75,8 +109,10 @@ Player.prototype.collisions = function() {
   (this.y === enemy2.y && enemy2.x - this.x > - 50 && enemy2.x - this.x < 50) ||
   (this.y === enemy3.y && enemy3.x - this.x > - 50 && enemy3.x - this.x < 50)){
     this.y = 400;
+    gameEnd();
+    document.removeEventListener('keyup', keyUp);
   };
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Player.prototype.render = function() {
@@ -96,9 +132,6 @@ Player.prototype.handleInput = function(keyCode){
   if (keyCode === "left") {
     this.x -= 100;
   }
-
-
-
 };
 
 // Now instantiate your objects.
@@ -113,7 +146,8 @@ var allEnemies = [enemy1, enemy2, enemy3];
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', function(e) {
+
+function keyUp(e) {
     var allowedKeys = {
         37: 'left',
         38: 'up',
@@ -122,4 +156,6 @@ document.addEventListener('keyup', function(e) {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-});
+}
+
+document.addEventListener('keyup', keyUp);

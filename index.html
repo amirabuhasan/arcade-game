@@ -3,11 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
+    <link href='https://fonts.googleapis.com/css?family=VT323' rel='stylesheet'>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.css">
+
 </head>
 <body>
-    <script src="js/resources.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/engine.js"></script>
+  <div class="score-board">
+    <span>Your score: </span><span class="high-score"></span><span class="score">0</span>
+  </div>
+
+  <div class="wrap">
+    <div class="modal js-modal">
+      <h1>Unlucky mate!</h1>
+      <p class="popup"></p>
+      <br />
+      <button class="js-close">Replay</button>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="js/resources.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/engine.js"></script>
 </body>
 </html>
