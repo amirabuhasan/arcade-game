@@ -102,9 +102,14 @@ function gameEnd() {
 };
 
 function restartGame() {
-  $(".js-close").on("click", function(){
+  $(".wrap").on("click", function(){
     location.reload();
   })
+  $("body").keyup(function(event){
+    if(event.keyCode == 13){
+        $(".js-close").click();
+    }
+});
 };
 
 //checks for collisions
