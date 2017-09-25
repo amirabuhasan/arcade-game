@@ -86,6 +86,7 @@ class Player {
       this.x -= 100;
     }
   };
+
 };
 
 
@@ -120,7 +121,7 @@ function restartGame() {
     if(event.keyCode == 13){
         $(".js-close").click();
     }
-  });
+  })
 };
 
 // Keeps track of the user's score.
