@@ -46,18 +46,18 @@ button {
   font-family: 'VT323' !important;
   font-size: 1.25em;
   font-weight: bold;
-  background-color: #02ccba;
+  background-color: Crimson;
   border: none;
   padding: .5em 1em;
   color: #fff;
-  box-shadow: 0 0 0 2px #02ccba inset;
+  box-shadow: 0 0 0 2px Crimson inset;
   border-radius: .25em;
   cursor: pointer;
   -webkit-transition: background .4s ease, color .4s ease;
   transition: background .4s ease, color .4s ease;
 }
 button:hover {
-  box-shadow: 0 0 0 2px #02ccba inset;
-  color: #02ccba;
+  box-shadow: 0 0 0 2px Crimson inset;
+  color: Crimson;
   background-color: transparent;
 }
