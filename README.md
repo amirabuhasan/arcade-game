@@ -16,9 +16,9 @@ Players are given the ability to control a character across the field using the 
 * The game ends once a player collides with an enemy.
 
 ## Screenshots
-![Alt text](/img/frogger1.png?raw=true)
-![Alt text](/img/frogger2.png?raw=true)
-![Alt text](/img/frogger3.png?raw=true)
+![Alt text](/images/frogger1.png?raw=true)
+![Alt text](/images/frogger2.png?raw=true)
+![Alt text](/images/frogger3.png?raw=true)
 
 ## Features
 * Score tracker to keep track of the number of times a player successfully crosses the field.
