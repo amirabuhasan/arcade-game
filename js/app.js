@@ -5,7 +5,9 @@ var enemyYPosition;
 var score = 0;
 var highscore = localStorage.getItem("highscore");
 
-// creates enemies that the player must avoid.
+// Creates enemy objects that the player must avoid.
+// Contains the enemy character's sprite, starting position on x-axis, and speed (randomized).
+// Takes the instances of the enemy's y-axis starting position as an input.
 class Enemy {
   constructor(y) {
     this.sprite = 'images/enemy-bug.png';
@@ -15,6 +17,7 @@ class Enemy {
   };
 
   // Updates the enemy's position.
+  // If the instance of the enemy has gone beyond the canvas, resets the position of the enemy to on the x-axis to 0, and re-assigns a random speed to the enemy.
   update(dt) {
     if (this.x <= 500) {
       this.x += this.speed * dt
@@ -24,13 +27,14 @@ class Enemy {
     }
   };
 
-  // Draw the enemy on the screen
+  // Draws the enemy character on the screen
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
 };
 
-// creates the "player" character, that the player controls.
+// Creates the "player" character, that the player controls.
+// Contains the player character's sprite, starting position on x-axis and y-axis, and displays the player's current high score.
 class Player {
   constructor(){
     this.sprite = 'images/char-boy.png';
@@ -39,7 +43,7 @@ class Player {
     $(".high-score").append(highscore);
   };
 
-  // Updates the player's position.
+  // Updates the player's position, ensure that the player's movement is restricted to within the canvas, and runs collisions() in the case a player collides with an enemy object.
   update() {
     if (this.x <= 0) {
       this.x = 0;
@@ -55,7 +59,8 @@ class Player {
     this.collisions();
   };
 
-  //checks for collisions based on the position of the player on the y & x-axis, as opposed to the enemy's position.
+  // Checks for collisions based on the position of the player on the y-axis & x-axis, and comparing it against the enemy's positions.
+  // Runs gameEnd() if collision occurs.
   collisions() {
     if ((this.y === enemy1.y && enemy1.x - this.x > - 50 && enemy1.x - this.x < 50) ||
     (this.y === enemy2.y && enemy2.x - this.x > - 50 && enemy2.x - this.x < 50) ||
@@ -66,7 +71,7 @@ class Player {
     };
   };
 
-  // Draws the player on the screen.
+  // Draws the player character on the screen.
   render() {
       ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   };
